@@ -2,13 +2,13 @@ class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :update, :destroy]
 
   def index
-    @todos = Todo.allocate
+    @todos = Todo.all
     json_response(@todos)
   end
 
   def create
     @todo = Todo.create!(todo_params)
-    json_response(@todo, :created)
+    json_response(@todo, "201")
   end
 
   def show
