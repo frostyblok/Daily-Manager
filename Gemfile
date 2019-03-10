@@ -31,7 +31,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # My gems
 
 # Use Activemodel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 
 gem 'jwt'
 
