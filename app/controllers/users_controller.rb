@@ -10,7 +10,8 @@ class UsersController < ApplicationController
 
   def login
     auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
-    json_response(auth_token: auth_token)
+    response = { message: Message.login_success, auth_token: auth_token }
+    json_response(response)
   end
 
   private
