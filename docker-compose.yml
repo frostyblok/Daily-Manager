@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  pg:
+    image: postgres:9.6-alpine
+    ports:
+      - 5436:5432
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=dailymanager-dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  daily-app:
+    image: frostyblok/dailymanager:latest
+    command: bash -c "rm -f tmp/pids/server.pid && rails s -b '0.0.0.0'"
+    volumes:
+      - .:/daily-app
+    ports:
+      - 3000:3000
+    environment:
+      - RAILS_MASTER_KEY=05d096cda30efe49e255833679fa6c47
+      - db_username=postgres
+      - db_password=postgres
+      - db_host=pg
+    depends_on:
+      - pg
+volumes:
+  pg-data:

@@ -10,11 +10,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+
 development:
   <<: *default
   database: dailymanager-dev
-  username: <%= Rails.application.credentials.db_username %>
-  password: <%= Rails.application.credentials.db_password %>
+  username: <%= DailyManager.credentials[:db_username] %>
+  password: <%= DailyManager.credentials[:db_password] %>
+  host: <%= DailyManager.credentials[:db_host] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,8 +24,9 @@ development:
 test:
   <<: *default
   database: dailymanager-test
-  username: <%= Rails.application.credentials.db_username %>
-  password: <%= Rails.application.credentials.db_password %>
+  username: <%= DailyManager.credentials[:db_username] %>
+  password: <%= DailyManager.credentials[:db_password] %>
+  host: <%= DailyManager.credentials[:db_host] %>
 
 production:
   <<: *default
