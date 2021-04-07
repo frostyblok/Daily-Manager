@@ -55,7 +55,7 @@ jobs:
           bundle exec rake db:create
           bundle exec rake db:schema:load
           bundle exec rake db:test:prepare
-          bundle exec rspec spec --format documentation
+          bundle exec rspec spec --format progress
       - uses: actions/upload-artifact@v1
         with:
           name: my_spec_log

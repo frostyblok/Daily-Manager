@@ -1,0 +1,22 @@
+name: Download CSV and Create PR
+on: push
+jobs:
+  create_test_time_pull_request:
+    runs-on: ubuntu-latest
+#    needs: record_test_times
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: my_spec_log
+      - uses: frostyblok/create-pull-request@v2
+        id: cpr
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update Test Log CSV
+          body: |
+            Testing
+          reviewers: frostyblok
+          base: master
+          branch: update-test-logs
+          branch-suffix: short-commit-hash
+          title: Update Test Logs
