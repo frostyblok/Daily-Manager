@@ -7,19 +7,19 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   run_tests:
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        testPath: ["spec:sliced[0,10]",
-#                   "spec:sliced[1,10]",
-#                   "spec:sliced[2,10]",
-#                   "spec:sliced[3,10]",
-#                   "spec:sliced[4,10]",
-#                   "spec:sliced[5,10]",
-#                   "spec:sliced[6,10]",
-#                   "spec:sliced[7,10]",
-#                   "spec:sliced[8,10]",
-#                   "spec:sliced[9,10]"]
+    strategy:
+      fail-fast: false
+      matrix:
+        testPath: ["spec:sliced[0,10]",
+                   "spec:sliced[1,10]",
+                   "spec:sliced[2,10]",
+                   "spec:sliced[3,10]",
+                   "spec:sliced[4,10]",
+                   "spec:sliced[5,10]",
+                   "spec:sliced[6,10]",
+                   "spec:sliced[7,10]",
+                   "spec:sliced[8,10]",
+                   "spec:sliced[9,10]"]
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -68,5 +68,4 @@ jobs:
           bundle exec rake db:create
           bundle exec rake db:schema:load
           bundle exec rake db:test:prepare
-          bundle exec rspec spec
-#          bundle exec rake ${{ matrix.testPath }}
+          bundle exec rake ${{ matrix.testPath }}
