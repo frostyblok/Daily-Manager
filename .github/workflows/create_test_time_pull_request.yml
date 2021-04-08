@@ -7,12 +7,13 @@ jobs:
   create_test_time_pull_request:
     runs-on: ubuntu-latest
     steps:
-#      - uses: actions/download-artifact@v1
-#        with:
-#          name: my_spec_log
+
       - uses: actions/checkout@v2
-      - name: Make changes to pull request
-        run: date +%s > my_spec_log.csv
+#      - name: Make changes to pull request
+#        run: date +%s > my_spec_log.csv
+      - uses: actions/download-artifact@v1
+        with:
+          name: my_spec_log
 
       - name: Create Pull Request
         id: cpr
