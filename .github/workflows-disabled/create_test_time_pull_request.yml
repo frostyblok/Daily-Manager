@@ -3,7 +3,7 @@ on: push
 jobs:
   create_test_time_pull_request:
     runs-on: ubuntu-latest
-#    needs: record_test_times
+    needs: record_test_time
     steps:
 #      - uses: actions/download-artifact@v1
 #        with:
@@ -21,10 +21,10 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: example-patchesy
-          base: develop
+          branch: real-patches
+          base: setup-gh-actions
           delete-branch: true
-          title: '[Example] Update reports'
+          title: '[Real] Update reports'
           body: |
             Update report
             - Updated with *today's* date
