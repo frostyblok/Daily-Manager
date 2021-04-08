@@ -1,16 +1,18 @@
 name: Download CSV and Create PR
-on: push
+on:
+  workflow_run:
+    workflows: ["Record Test Time"]
+    types: [completed]
 jobs:
   create_test_time_pull_request:
     runs-on: ubuntu-latest
-    needs: record_test_time
     steps:
 #      - uses: actions/download-artifact@v1
 #        with:
 #          name: my_spec_log
       - uses: actions/checkout@v2
       - name: Make changes to pull request
-        run: date +%s > report.txt
+        run: date +%s > my_spec_log.csv
 
       - name: Create Pull Request
         id: cpr
