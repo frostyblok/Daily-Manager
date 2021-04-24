@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="548c535a-1bad-4336-8dcd-ca91edb74c66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/create_test_time_pull_request.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/create_test_time_pull_request.yml" afterDir="false" />
-    </list>
+    <list default="true" id="548c535a-1bad-4336-8dcd-ca91edb74c66" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
