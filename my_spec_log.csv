@@ -1,0 +1,9 @@
+Example,Status,Run Time,Exceptions
+./spec/auth/authorize_api_request_spec.rb,passed,0.211386,""
+./spec/controllers/application_controller_spec.rb,passed,0.020268,""
+./spec/models/item_spec.rb,passed,0.019563,""
+./spec/models/todo_spec.rb,passed,0.01949,""
+./spec/models/user_spec.rb,passed,0.016456,""
+./spec/requests/items_spec.rb,passed,1.150636,""
+./spec/requests/todos_spec.rb,passed,0.448748,""
+./spec/requests/users_spec.rb,passed,0.111074,""

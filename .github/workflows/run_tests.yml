@@ -1,0 +1,71 @@
+name: Run Tests
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  run_tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        testPath: ["spec:sliced[0,10]",
+                   "spec:sliced[1,10]",
+                   "spec:sliced[2,10]",
+                   "spec:sliced[3,10]",
+                   "spec:sliced[4,10]",
+                   "spec:sliced[5,10]",
+                   "spec:sliced[6,10]",
+                   "spec:sliced[7,10]",
+                   "spec:sliced[8,10]",
+                   "spec:sliced[9,10]"]
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports: ['6379:6379']
+        options: --entrypoint redis-server
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+      - name: Setup cache key and directory for gems cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Bundle install
+        env:
+          RAILS_ENV: test
+        run: |
+          gem install bundler:1.16.6
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: Run tests
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bundle exec rake db:drop
+          bundle exec rake db:create
+          bundle exec rake db:schema:load
+          bundle exec rake db:test:prepare
+          bundle exec rake ${{ matrix.testPath }}
